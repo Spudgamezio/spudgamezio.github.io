@@ -72,25 +72,24 @@
     }
   </style>
   <style>
-    /* Hide the mobile message by default */
+
     .mobile-message {
         display: none;
     }
 
-    /* Display the mobile message only on mobile devices */
     @media only screen and (max-width: 768px) {
         .mobile-message {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: white; /* Optional: to ensure a clear background */
+            background-color: white; 
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             text-align: center;
-            z-index: 1000; /* Ensure it appears on top of other content */
+            z-index: 1000; 
         }
 
         .mobile-message img {
@@ -228,7 +227,11 @@
         </div>
     </header>
     <section class="game-list">       </div>
-    </div>
+    </div><a href="https://discord.gg/zEamPg7NQm" class="game-item game-hover discord-button">
+        <img src="favpng_discord-social-media.png" alt="Discord Logo" loading="lazy" />
+        <img src="favpng_discord-social-media.png" alt="Discord Animation" loading="lazy" />
+        <h3>Join the Discord</h3>
+    </a>
     <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=Tribals'">
         <img src="Screenshot 2024-08-14 121948.png" alt="https://tribals.io" loading="lazy" />
         <img src="152 - Made with Clipchamp.gif" alt="#" loading="lazy" />
