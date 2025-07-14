@@ -1,684 +1,913 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta name='description' content="Welcome to SpudGames.io – Your Ultimate Hub for Unblocked .IO Games!
-    At SpudGames.io, we bring you the best collection of unblocked .IO games, all in one place. Whether you're looking to pass the time at school, work, or anywhere in between, we've got you covered with a wide variety of addictive, fun, and free games that you can play anytime, anywhere. ">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🥔Spud gamez🥔</title>
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="manifest" href="site.webmanifest">
-  <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-  <link rel="shortcut icon" href="favicon.ico">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="msapplication-config" content="browserconfig.xml">
-  <meta name="theme-color" content="#ffffff">
-  <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
-  <meta name="msvalidate.01" content="EC1CCB1F640A0ADB3EDCE67E2F944897" />
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1925710605744513"
-  crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <title>Spudgamez.com</title>
+  <link rel="stylesheet" href="./style.css" />
   <style>
+    /* hi and welcome to my code its kinda messy sorry lol if you take something from here please click on a couple of ads :) thanks */
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      transition: margin-right .5s;
+      background: url('websitebacksp.png');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      overflow: auto;
+    }
+
+    .container {
+      display: flex;
     }
 
     .sidebar {
+      width: 200px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: fixed;
       height: 100%;
-      width: 0;
+      overflow-y: blocked;
+      z-index: 2;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar.hidden {
+      display: none;
+      /* Hide sidebar */
+    }
+
+    .sidebar button {
+      display: block;
+      width: 90%;
+      margin: 0 auto;
+      padding: 8px;
+      background: #fff;
+      border: none;
+      font-weight: bold;
+      font-size: 1.1em;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 4px;
+      color: #000;
+    }
+
+    .sidebar button:hover {
+      background: #ccc;
+    }
+
+    .content {
+      margin-left: 220px;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+
+    .game-card {
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 15px;
+      width: 250px;
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.2s ease;
+      z-index: 1;
+    }
+
+    .game-card:hover {
+      transform: scale(1.05);
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .game-card h3 {
+      margin: 10px;
+      color: #fff;
+    }
+
+    #game-overlay {
       position: fixed;
       top: 0;
-      right: 0;
-      background-color: #313030;
-      overflow-x: hidden;
-      transition: 0.5s;
-      padding-top: 60px;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      flex-direction: column;
     }
 
-    .sidebar a {
-      padding: 10px 15px;
-      text-decoration: none;
-      font-size: 25px;
-      color: white;
-      display: block;
-      transition: 0.3s;
-    }
-
-    .sidebar a:hover {
-      background-color: #837f7f;
-    }
-
-    .openBtn {
-      font-size: 30px;
-      cursor: pointer;
-      background: none;
+    #game-iframe {
+      width: 100%;
+      height: calc(100% - 50px);
       border: none;
+      z-index: 10000;
+    }
+
+    #bottom-bar {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 50px;
+      background: #1f1f2e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 10px;
+      color: #fff;
+      z-index: 10001;
+    }
+
+    #bottom-bar .left,
+    #bottom-bar .center,
+    #bottom-bar .right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #bottom-bar button,
+    #bottom-bar .icon {
+      background: #333;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #bottom-bar .icon {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #444;
+      border-radius: 50%;
+      font-size: 1em;
+    }
+
+    #bottom-bar button:hover,
+    #bottom-bar .icon:hover {
+      background: #555;
+    }
+
+    .ripple {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      transform: scale(0);
+      animation: ripple-animation 0.6s linear;
+      pointer-events: none;
+    }
+
+    @keyframes ripple-animation {
+      to {
+        transform: scale(15);
+        opacity: 0;
+      }
+    }
+
+    /* Fix: Make canvas or star cursor pointer-events none so it doesn't block clicks */
+    #starCanvas {
+      pointer-events: none;
       position: fixed;
-      top: 20px;
-      right: 20px;
-      color: #f6f6f6;
-      transition: transform 0.5s;
-    }
-
-    .openBtn.open {
-      transform: rotate(90deg);
-    }
-
-    .openBtn:hover {
-      color: #9a9a9a;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 100000;
+      /* On top of everything visually */
     }
   </style>
-  <style>
-
-    .mobile-message {
-        display: none;
-    }
-
-    @media only screen and (max-width: 768px) {
-        .mobile-message {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: white; 
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            z-index: 1000; 
-        }
-
-        .mobile-message img {
-            max-width: 100%;
-            height: auto;
-        }
-    }
-</style>
 </head>
-<body>
-<div class="mobile-message">
-    <img src="sorrymobile-Photoroom.png" alt="Sorry, this website isn't for mobile" loading="lazy" />
+<!-- SHARE MODAL -->
+<div id="share-modal" style="
+  display:none;
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 350px;
+  background: rgba(0,0,0,0.95);
+  border-radius: 12px;
+  padding: 20px;
+  color: white;
+  z-index: 10020;
+  box-shadow: 0 0 15px #ff66cc;
+">
+  <h2 style="text-align:center; margin-top:0;">📢 Invite Friends</h2>
+  <p style="font-size: 0.95em;">Share this site or a specific game with your friends!</p>
+  <input type="text" id="share-link" style="
+    width:100%; padding:8px; border:none; border-radius:5px; margin-bottom:10px;
+    font-size: 0.95em;" readonly>
+  <button id="copy-link-btn" style="
+    width:100%; padding:10px; background:#00ccff; border:none;
+    color:#000; font-weight:bold; border-radius:5px; cursor:pointer;">📋 Copy Link</button>
+  <button id="close-share-btn" style="
+    width:100%; margin-top:10px; padding:10px; background:#ff4444; border:none;
+    color:#fff; border-radius:5px; cursor:pointer;">✖ Close</button>
 </div>
 
+<body>
 
-  <div id="sidebar" class="sidebar">
-    <a href="index.html">Home 🏠</a>
-    <a href="gungames.html">fps ︻╦╤──</a>
-    <a href="retrogames.html">Retro 👾</a>
-    <a href="minecraftgames.html">Minecraft ⛏</a>
-    <a href="peach22.html">Peaceful 🍃</a>
-    <a href="arcade.html">Arcade 🎮</a> 
-    <a href="pvpg45t.html">PvP ⚔️</a> 
-    <a href="2dg67u.html">2d 🟦</a> 
-    <a href="serviv.html">Survival 🌴</a>
-    <a href="iogames.html">.io 🕹️</a>
-    <a href="flappysuswebsite40html.html">flappy sus ඞ</a>
-    
+  <div class="container">
+    <div class="sidebar" id="sidebar">
+      <img src="spudlogo.png" alt="soon to be logo" width="auto" height="auto" />
+      
+      <button id="show-leaderboard-btn">Show Leaderboard</button>                       
+      <button onclick="openShareModal()">📢 Invite Friends</button>
+      <button onclick="window.location.href='https://discord.gg/8NCprcYySS'">Discord!</button>
+      <button onclick="window.location.href='house.html'">House</button>
+      <div id="site-time" style="color:#ccc; font-size: 0.9em; padding: 10px; text-align:center;">
+        Total time on site: <span id="total-time">0s</span>
+<style>
+  .marquee-container {
+    width: 100%;
+    height: 120px; /* adjust height as needed */
+    overflow: hidden;
+    position: relative;
+    /* No background color, fully transparent */
+    background: transparent;
+  }
+
+  .marquee-track {
+    display: flex;
+    position: absolute;
+    white-space: nowrap;
+    will-change: transform;
+    animation: scroll-left 20s linear infinite;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  .marquee-track img {
+    width: 50px; /* adjust image size */
+    height: 50px;
+    margin: 0 15px;
+    position: relative;
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+</style>
+
+<div class="marquee-container" id="marquee">
+  <div class="marquee-track" id="marquee-track">
+    <!-- Images will be inserted here -->
+  </div>
+</div>
+
+<script>
+  const images = [
+    'spud1run.png',
+    'spud2run.png',
+    'spud3run.png',
+    'spud4run.png',
+    'spud5run.png',
+    'spud6run.png',
+    'spud7run.png',
+    '0cd696e7d083612eb8d98f70729186bf.png',
+    '8444afd73eb34c28246d224e35e40723.png',
+    '9075b1eb40a413996961047401dd8192.png',
+    '06246591d7da68194992fe30e360be25.png',
+    'a3863345acdb99ed26405e82fc8cfb5f.png',
+    'ab596106b0caf13f8fe03c11fc53d496.png',
+    'bf1cd9d8511265420f436766f0f3695c.png',
+  ];
+
+  const track = document.getElementById('marquee-track');
+
+  function createImageElements() {
+    const fragment = document.createDocumentFragment();
+
+    images.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      const offset = Math.floor(Math.random() * 30) + 20;
+      img.style.top = offset + 'px';
+      fragment.appendChild(img);
+    });
+
+    return fragment;
+  }
+
+  track.appendChild(createImageElements());
+  track.appendChild(createImageElements());
+</script>
+	
+      </div>
+
+
+
+    </div>
+    <div class="content">
+      <!-- All your game cards -->
+
+  <div class="game-card" onclick="openGame('https://slither.io/')">
+        <img src="slitherio.png" alt="Slither.io" />
+        <h3>Slither.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://krunker.io/')">
+        <img src="cover-1591336739727.avif" alt="Krunker.io" />
+        <h3>Krunker.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://diep.io/')">
+        <img src="deepio1.png" alt="Diep.io" />
+        <h3>Diep.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://paper-io.com/')">
+        <img src="paperio.png" alt="Paper.io" />
+        <h3>Paper.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://tribals.io')">
+        <img src="Screenshot 2024-08-14 121948.png" alt="Tribals.io" />
+        <h3>Tribals.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://taming.io')">
+        <img src="Screenshot 2024-07-28 211345.png" alt="Taming.io" />
+        <h3>Taming.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://bloxd.io')">
+        <img src="Screenshot 2024-07-28 172655.png" alt="Bloxd.io" />
+        <h3>Bloxd.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://eaglercraft.com')">
+        <img src="Screenshot 2024-08-04 202725.png" alt="Eaglercraft" />
+        <h3>Eaglercraft</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://evoworld.io')">
+        <img src="Screenshot 2024-07-29 080402.png" alt="Evoworld.io" />
+        <h3>Evoworld.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://raaaaft.io')">
+        <img src="raaaaftiodontcopy.png" alt="Raaaaft.io" />
+        <h3>Raaaaft.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://impostor.io')">
+        <img src="Screenshot 2024-07-28 173334.png" alt="Impostor.io" />
+        <h3>Impostor.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://paper-io.com')">
+        <img src="Screenshot 2024-07-28 173655.png" alt="Paper.io" />
+        <h3>Paper.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://hole-io.com')">
+        <img src="Screenshot 2024-07-28 175530.png" alt="Hole.io" />
+        <h3>Hole.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://yp3d.com/ships3d')">
+        <img src="Screenshot 2024-07-28 180650.png" alt="Ships 3D" />
+        <h3>Ships 3D</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://krew.io')">
+        <img src="Screenshot 2024-07-28 180906.png" alt="Krew.io" />
+        <h3>Krew.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://warbrokers.io')">
+        <img src="Screenshot 2024-07-28 181245.png" alt="War Brokers" />
+        <h3>War Brokers</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://amongusplay.online')">
+        <img src="Screenshot 2024-07-28 181520.png" alt="Among Us" />
+        <h3>Among Us</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://shellshock.io')">
+        <img src="Screenshot 2024-07-28 181715.png" alt="ShellShock.io" />
+        <h3>ShellShock.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://nuggetroyale.io')">
+        <img src="Screenshot 2024-07-28 181810.png" alt="Nugget Royale" />
+        <h3>Nugget Royale</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://landho.uk')">
+        <img src="Screenshot 2024-07-28 182005.png" alt="Landho.io" /> d
+        <h3>Landho.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://tileman.io')">
+        <img src="Screenshot 2024-07-28 182121.png" alt="Tileman.io" />
+        <h3>Tileman.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://dashcraft.io')">
+        <img src="Screenshot 2024-07-28 182420.png" alt="Dashcraft.io" />
+        <h3>Dashcraft.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://tyran.io')">
+        <img src="Screenshot 2024-07-28 182616.png" alt="Tyran.io" />
+        <h3>Tyran.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://ferals.io')">
+        <img src="Screenshot 2024-07-28 182855.png" alt="Ferals.io" />
+        <h3>Ferals.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://battledudes.io')">
+        <img src="Screenshot 2024-07-28 182954.png" alt="Battle Dudes" />
+        <h3>Battle Dudes</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://gobattle.io')">
+        <img src="Screenshot 2024-07-28 183106.png" alt="GoBattle.io" />
+        <h3>GoBattle.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://gooberroyale.winterpixel.io')">
+        <img src="Screenshot 2024-07-28 183208.png" alt="Goober Royale" />
+        <h3>Goober Royale</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://slither.io')">
+        <img src="Screenshot 2024-07-28 183302.png" alt="Slither.io" />
+        <h3>Slither.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://gulper.io')">
+        <img src="Screenshot 2024-07-28 183404.png" alt="Gulper.io" />
+        <h3>Gulper.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://minigiants.io')">
+        <img src="Screenshot 2024-07-28 183525.png" alt="MiniGiants.io" />
+        <h3>MiniGiants.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://starblast.io/mobile.html')">
+        <img src="Screenshot 2024-07-28 200146.png" alt="Starblast.io" />
+        <h3>Starblast.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://voxiom.io')">
+        <img src="Screenshot 2024-07-28 175907.png" alt="Voxiom.io" />
+        <h3>Voxiom.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://diep.io')">
+        <img src="Screenshot 2024-07-28 200721.png" alt="Diep.io" />
+        <h3>Diep.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://sploop.io')">
+        <img src="Screenshot 2024-07-28 200835.png" alt="Sploop.io" />
+        <h3>Sploop.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('http://www.narwhale.io')">
+        <img src="Screenshot 2024-07-28 204923.png" alt="Narwhale.io" />
+        <h3>Narwhale.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://ev.io')">
+        <img src="Screenshot 2024-07-28 210343.png" alt="Ev.io" />
+        <h3>Ev.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://stug.io')">
+        <img src="Screenshot 2024-07-28 210756.png" alt="Stug.io" />
+        <h3>Stug.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://apes.io')">
+        <img src="Screenshot 2024-07-28 210932.png" alt="Apes.io" />
+        <h3>Apes.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://krunker.io')">
+        <img src="Screenshot 2024-07-28 211619.png" alt="Krunker.io" />
+        <h3>Krunker.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://1v1.lol')">
+        <img src="Screenshot 2024-07-28 212446.png" alt="1v1.lol" />
+        <h3>1v1.lol</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://narrow.one')">
+        <img src="Screenshot 2024-07-28 212744.png" alt="Narrow One" />
+        <h3>Narrow One</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://zombsroyale.io')">
+        <img src="Screenshot 2024-07-29 070228.png" alt="Zombs Royale" />
+        <h3>Zombs Royale</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://yohoho.io')">
+        <img src="Screenshot 2024-07-29 070437.png" alt="Yohoho.io" />
+        <h3>Yohoho.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://lordz.io')">
+        <img src="Screenshot 2024-07-29 070830.png" alt="Lordz.io" />
+        <h3>Lordz.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://html5.gamedistribution.com/0096623d22314e98ac7af01cbd5dfeca')">
+        <img src="Screenshot 2024-07-29 071209.png" alt="Tanko.io" />
+        <h3>Tanko.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://stabfish2.io/#')">
+        <img src="Screenshot 2024-07-29 071538.png" alt="Stabfish2.io" />
+        <h3>Stabfish2.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://astrodud.io')">
+        <img src="Screenshot 2024-07-29 071729.png" alt="Astrodud.io" />
+        <h3>Astrodud.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://www.modd.io/play/braainsio')">
+        <img src="Screenshot 2024-07-29 071906.png" alt="Braainsio.io" />
+        <h3>Braainsio.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://buildroyale.io')">
+        <img src="Screenshot 2024-07-29 072609.png" alt="Buildroyale.io" />
+        <h3>Buildroyale.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://skribbl.io')">
+        <img src="Screenshot 2024-07-29 072847.png" alt="Skribbl.io" />
+        <h3>Skribbl.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://digdig.io')">
+        <img src="Screenshot 2024-07-29 073122.png" alt="Digdig.io" />
+        <h3>Digdig.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://superspin.io')">
+        <img src="Screenshot 2024-07-29 073310.png" alt="Superspin.io" />
+        <h3>Superspin.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://ducklings.io')">
+        <img src="Screenshot 2024-07-29 073440.png" alt="Ducklings.io" />
+        <h3>Ducklings.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://richup.io')">
+        <img src="Screenshot 2024-07-29 074422.png" alt="Richup.io" />
+        <h3>Richup.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://mk48.io')">
+        <img src="Screenshot 2024-07-29 084329.png" alt="MK48.io" />
+        <h3>MK48.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://slowroads.io')">
+        <img src="Screenshot 2024-08-14 121041.png" alt="Slowroads.io" />
+        <h3>Slowroads.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://mineparkour.club')">
+        <img src="Screenshot 2024-07-29 084538.png" alt="MineParkour.club" />
+        <h3>MineParkour.club</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://mudwars.io')">
+        <img src="Screenshot 2024-07-29 084802.png" alt="MudWars.io" />
+        <h3>MudWars.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://game.warrobots.com')">
+        <img src="Screenshot 2024-07-29 085059.png" alt="Warbot.io" />
+        <h3>Warbot.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://mope.io')">
+        <img src="Screenshot 2024-07-29 085529.png" alt="Mope.io" />
+        <h3>Mope.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://crowdcity.io')">
+        <img src="Screenshot 2024-07-29 085833.png" alt="CrowdCity.io" />
+        <h3>CrowdCity.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://super-hex.io')">
+        <img src="Screenshot 2024-07-29 090033.png" alt="SuperHex.io" />
+        <h3>SuperHex.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://gats.io')">
+        <img src="Screenshot 2024-07-29 090202.png" alt="Gats.io" />
+        <h3>Gats.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://eparkour.io')">
+        <img src="Screenshot 2024-07-29 090355.png" alt="eParkour.io" />
+        <h3>eParkour.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://www.creatur.io')">
+        <img src="Screenshot 2024-07-29 090730.png" alt="Creatur.io" />
+        <h3>Creatur.io</h3>
+      </div>
+      <div class="game-card" onclick="openGame('https://armedforces.io')">
+        <img src="Screenshot 2024-07-29 091018.png" alt="ArmedForces.io" />
+        <h3>ArmedForces.io</h3>
+      </div>
+    </div>
+  </div>
+  <div id="leaderboard-modal" style="
+  display:none;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 350px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: rgba(0,0,0,0.95);
+  border-radius: 12px;
+  padding: 20px;
+  color: white;
+  z-index: 10010;
+  box-shadow: 0 0 15px #00ffcc;
+">
+    <h2 style="text-align:center; margin-top:0;">Game Leaderboard</h2>
+    <ol id="leaderboard-list" style="padding-left: 20px;"></ol>
+    <button style="
+    margin-top: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 8px 16px;
+    border: none;
+    background: #ff4444;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+  " id="close-leaderboard-btn">Close</button>
   </div>
 
-  <button id="openBtn" class="openBtn">&#9776;</button>
+  <div id="game-overlay">
+    <iframe id="game-iframe"></iframe>
+    <div id="bottom-bar">
+      <div class="left">
+        <strong>Bloxd.io</strong>
+      </div>
+      <div class="center">
+        <button id="hide-bar-btn" onclick="toggleBarVisibility()">Hide this bar</button>
+        <button onclick="closeGame()">Exit Game</button>
+      </div>
+      <button id="exit-top-btn" title="Exit Game" style="
+          position: fixed;
+          top: 10px;
+          right: 10px;
+          z-index: 10002;
+          background: #ff4444;
+          border: none;
+          color: white;
+          padding: 8px 12px;
+          font-size: 16px;
+          border-radius: 5px;
+          cursor: pointer;
+          box-shadow: 0 0 8px rgba(255,0,0,0.7);
+        ">
+        Exit ✖
+      </button>
+
+      <div class="right">
+        <button onclick="inviteFriends()">Invite Friends</button>
+        <div class="icon" onclick="likeGame()">👍</div>
+        <div class="icon" onclick="dislikeGame()">👎</div>
+        <div class="icon" onclick="favoriteGame()">❤️</div>
+        <div class="icon" onclick="commentGame()">💬</div>
+        <div class="icon" onclick="openShareModal()" title="Share this game">➕</div>
+        <div class="icon" onclick="toggleFullscreen()">⛶</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Star cursor canvas -->
+  <canvas id="starCanvas"></canvas>
+
+  <script src="./script.js"></script>
 
   <script>
-    let isOpen = false;
-    document.getElementById("openBtn").onclick = function() {
-      if (isOpen) {
-        document.getElementById("sidebar").style.width = "0";
-        document.body.style.marginRight = "0";
-        this.classList.remove("open");
-      } else {
-        document.getElementById("sidebar").style.width = "250px";
-        document.body.style.marginRight = "250px";
-        this.classList.add("open");
-      }
-      isOpen = !isOpen;
+    const sidebar = document.getElementById('sidebar');
+    const gameOverlay = document.getElementById('game-overlay');
+    const gameIframe = document.getElementById('game-iframe');
+
+    function openGame(url) {
+      gameIframe.src = url;
+      gameOverlay.style.display = 'flex';
+      sidebar.classList.add('hidden'); // Hide sidebar
+      document.body.style.overflow = 'hidden'; // Prevent body scroll while game open
     }
+
+    function closeGame() {
+      document.exitFullscreen();
+      gameIframe.src = '';
+      gameOverlay.style.display = 'none';
+      sidebar.classList.remove('hidden'); // Show sidebar
+      document.body.style.overflow = 'auto';
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        gameOverlay.requestFullscreen().catch(err => alert(`Error: ${err.message}`));
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    function toggleBarVisibility() {
+      const bar = document.getElementById('bottom-bar');
+      const btn = document.getElementById('hide-bar-btn');
+      if (bar.style.display === 'none') {
+        bar.style.display = 'flex';
+        btn.textContent = 'Hide this bar';
+      } else {
+        bar.style.display = 'none';
+        btn.textContent = 'Show bar';
+      }
+    }
+
+    // Stub functions for buttons
+    function shareGame() {
+      openShareModal(); // open the actual modal
+    }
+
+    function likeGame() { alert('You liked the game!'); }
+    function dislikeGame() { alert('You disliked the game!'); }
+    function favoriteGame() { alert('Game added to favorites!'); }
+    function commentGame() { alert('Open comments section!'); }
+    function shareGame() { alert('Share this game!'); }
+
+    // Ripple effect on click
+    document.addEventListener('click', function (e) {
+      const ripple = document.createElement('div');
+      ripple.className = 'ripple';
+      ripple.style.left = `${e.clientX - 10}px`;
+      ripple.style.top = `${e.clientY - 10}px`;
+      document.body.appendChild(ripple);
+      ripple.addEventListener('animationend', () => ripple.remove());
+    });
+    // --- Time Tracking ---
+
+    // Utilities for formatting seconds into HH:MM:SS
+    function formatTime(seconds) {
+      const h = Math.floor(seconds / 3600);
+      const m = Math.floor((seconds % 3600) / 60);
+      const s = seconds % 60;
+      return `${h > 0 ? h + 'h ' : ''}${m > 0 ? m + 'm ' : ''}${s}s`;
+    }
+
+    // --- Total site time ---
+
+    let totalTime = parseInt(localStorage.getItem('totalTime')) || 0;
+    const totalTimeEl = document.getElementById('total-time');
+
+    function updateTotalTime() {
+      totalTime++;
+      localStorage.setItem('totalTime', totalTime);
+      totalTimeEl.textContent = formatTime(totalTime);
+    }
+
+    // Update site time every second
+    setInterval(updateTotalTime, 1000);
+    updateTotalTime(); // initial display
+
+    // --- Game time tracking ---
+
+    let gameStartTime = null;
+    let currentGameUrl = null;
+    let gameTimeElapsed = 0; // seconds
+    const gameTimeEl = document.getElementById('game-time');
+
+    function startGameTimer(url) {
+      currentGameUrl = url;
+      gameStartTime = Date.now();
+
+      // Load saved time or start from 0
+      gameTimeElapsed = parseInt(localStorage.getItem(`gameTime_${url}`)) || 0;
+      updateGameTimeDisplay();
+    }
+
+    function stopGameTimer() {
+      if (!currentGameUrl) return;
+
+      const now = Date.now();
+      const elapsed = Math.floor((now - gameStartTime) / 1000);
+      gameTimeElapsed += elapsed;
+
+      // Save to localStorage
+      localStorage.setItem(`gameTime_${currentGameUrl}`, gameTimeElapsed);
+
+      currentGameUrl = null;
+      gameStartTime = null;
+      gameTimeElapsed = 0;
+      updateGameTimeDisplay();
+    }
+
+    function updateGameTimeDisplay() {
+      gameTimeEl.textContent = `Time playing: ${formatTime(gameTimeElapsed)}`;
+    }
+
+    // Update game timer every second if game is running
+    setInterval(() => {
+      if (gameStartTime) {
+        const now = Date.now();
+        const elapsed = Math.floor((now - gameStartTime) / 1000);
+        gameTimeElapsed += 0; // don't increment here, we calculate elapsed dynamically
+        const total = Math.floor(elapsed + gameTimeElapsed);
+        gameTimeEl.textContent = `Time playing: ${formatTime(total)}`;
+      }
+    }, 1000);
+
+    // Override your openGame and closeGame functions to start/stop timer
+
+    const originalOpenGame = openGame;
+    const originalCloseGame = closeGame;
+
+    openGame = function (url) {
+      originalOpenGame(url);
+      startGameTimer(url);
+    };
+
+    closeGame = function () {
+      stopGameTimer();
+      originalCloseGame();
+    };
+    document.getElementById('exit-top-btn').addEventListener('click', () => { //exit out of game
+      closeGame();
+    });
+
+    // Utility to convert seconds to readable time (reuse your formatTime)
+    function formatTime(seconds) {
+      const d = Math.floor(seconds / 86400);
+      const h = Math.floor((seconds % 86400) / 3600);
+      const m = Math.floor((seconds % 3600) / 60);
+      const s = seconds % 60;
+      return `${d > 0 ? d + 'd ' : ''}${h > 0 ? h + 'h ' : ''}${m > 0 ? m + 'm ' : ''}${s}s`;
+    }
+
+    // Get all game times from localStorage
+    function getAllGameTimes() {
+      const games = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith('gameTime_')) {
+          const url = key.replace('gameTime_', '');
+          const time = parseInt(localStorage.getItem(key)) || 0;
+          games.push({ url, time });
+        }
+      }
+      return games;
+    }
+
+    // Render leaderboard list
+    function renderLeaderboard() {
+      const listEl = document.getElementById('leaderboard-list');
+      listEl.innerHTML = '';
+
+      const games = getAllGameTimes();
+      if (games.length === 0) {
+        listEl.innerHTML = '<li>No games played yet.</li>';
+        return;
+      }
+
+      // Sort by time descending
+      games.sort((a, b) => b.time - a.time);
+
+      games.forEach(({ url, time }) => {
+        // Extract game name from url or use URL as fallback
+        let name = url;
+        try {
+          const hostname = new URL(url).hostname;
+          name = hostname.replace('www.', '').split('.')[0];
+          // Map some known to prettier names (optional)
+          if (name.toLowerCase() === 'krunker') name = 'Krunker.io';
+          else if (name.toLowerCase() === 'slither') name = 'Slither.io';
+          else if (name.toLowerCase() === 'diep') name = 'Diep.io';
+          else if (name.toLowerCase() === 'bloxd') name = 'Bloxd.io';
+          else if (name.toLowerCase() === 'paper-io') name = 'Paper.io';
+          else if (name.toLowerCase() === 'amongusplay') name = 'Among Us';
+        } catch { }
+
+        const li = document.createElement('li');
+        li.style.cursor = 'pointer';
+        li.style.marginBottom = '8px';
+        li.textContent = `${name} — ${formatTime(time)}`;
+        li.title = 'Click to play this game';
+        li.onclick = () => {
+          openGame(url);
+          closeLeaderboard();
+        };
+        listEl.appendChild(li);
+      });
+    }
+
+    // Show/hide leaderboard modal
+    const leaderboardModal = document.getElementById('leaderboard-modal');
+    const showLeaderboardBtn = document.getElementById('show-leaderboard-btn');
+    const closeLeaderboardBtn = document.getElementById('close-leaderboard-btn');
+
+    function openLeaderboard() {
+      renderLeaderboard();
+      leaderboardModal.style.display = 'block';
+      document.body.style.overflow = 'hidden'; // prevent background scroll
+    }
+    function closeLeaderboard() {
+      leaderboardModal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    showLeaderboardBtn.addEventListener('click', openLeaderboard);
+    closeLeaderboardBtn.addEventListener('click', closeLeaderboard);
+
+
+
   </script>
 
-
-    <style>
-        
-        
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #0C0D14;
-            color: #F9FAFF;
-            margin: 0;
-            padding: 0;
-        }
-        .header {
-            padding: 20px;
-            text-align: center;
-            background-color: #1A1B2D;
-        }
-        .search-container {
-            margin: 20px 0;
-        }
-        .search-box {
-            width: 80%;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        .game-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            padding: 20px;
-        }
-        .game-item {
-            width: 200px;
-            margin: 20px;
-            text-align: center;
-            cursor: pointer;
-        }
-        .game-item img {
-            width: 100%;
-            max-width: 200px;
-            min-height: 125px;
-            height: auto;
-            border-radius: 10px;
-        }
-        .game-item h3 {
-            font-size: 18px;
-            margin: 10px 0;
-        }
-        .game-hover img + img  {
-            display: none;
-        }
-        .game-item:hover img + img {
-            display: inline-block;
-        }
-        .game-item.game-hover:hover img:first-child {
-            opacity: 0;
-            position: absolute;
-        }
-    </style>
-    <script>
-        function filterGames() {
-            const query = document.getElementById('search-box').value.toLowerCase();
-            const games = document.querySelectorAll('.game-item');
-
-            games.forEach(game => {
-                const title = game.querySelector('h3').innerText.toLowerCase();
-                if (title.includes(query)) {
-                    game.style.display = 'block';
-                } else {
-                    game.style.display = 'none';
-                }
-            });
-        }
-    </script>
-</head>
-<body>
-    <div class='nav-brand'>
-        <a href='/'> 
-          <img src='logospud.png' alt='logospud.png' width='250px' height='100'> 
-        </a> 
-       </div> 
-    <header class="header">
-        <h1></h1>
-        <div class="search-container">
-            <input id="search-box" class="search-box" type="text" placeholder="Search for games..." oninput="filterGames()">
-        </div>
-    </header>
-    <section class="game-list">       </div>
-    </div><a href="https://discord.gg/zEamPg7NQm" class="game-item game-hover discord-button">
-        <img src="favpng_discord-social-media.png" alt="Discord Logo" loading="lazy" />
-        <img src="favpng_discord-social-media.png" alt="Discord Animation" loading="lazy" />
-        <h3>Join the Discord</h3>
-    </a>
-    <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=Tribals'">
-        <img src="Screenshot 2024-08-14 121948.png" alt="https://tribals.io" loading="lazy" />
-        <img src="152 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-        <h3>tribals.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=Taming'">
-            <img src="Screenshot 2024-07-28 211345.png" alt="https://taming.io" loading="lazy" />
-            <img src="taming.gif" alt="https://taming.io" loading="lazy" />
-            <h3>Taming.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=bloxd'">
-            <img src="Screenshot 2024-07-28 172655.png" alt="Bloxd.io" loading="lazy" />
-            <img src="bloxdio.gif" alt="Bloxd.io" loading="lazy" />
-            <h3>Bloxd.io</h3>
-        </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=eaglercraft'">
-            <img src="Screenshot 2024-08-04 202725.png" alt="eaglercraft" loading="lazy" />
-            <img src="minecraft32.gif" alt="eaglercraft" loading="lazy" />
-            <h3>eaglercraft</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=evoworld'">
-            <img src="Screenshot 2024-07-29 080402.png"alt="evoworld.io"> 
-            <img src="evomoke.gif" alt="#" loading="lazy" />
-            <h3>Evoworld.io</h3>
-        </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=raft'">
-            <img src="raaaaftiodontcopy.png" alt="https://raaaaft.io/" loading="lazy" />
-            <img src="raaaftio - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>raaaaft.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=impostor'">
-            <img src="Screenshot 2024-07-28 173334.png" alt="Impostor.io" loading="lazy" />
-            <img src="whyareyoulookingathis.gif" alt="Impostor.io" loading="lazy" />
-            <h3>Impostor.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=paper'">
-            <img src="Screenshot 2024-07-28 173655.png" alt="https://paper-io.com/" loading="lazy" />
-            <img src="paperio - Made with Clipchamp.gif" alt="https://paper-io.com/" loading="lazy" />
-            <h3>Paper.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=hole.io'">
-            <img src="Screenshot 2024-07-28 175530.png" alt="https://hole-io.com/" loading="lazy" />
-            <img src="holeio68.gif" alt="https://hole-io.com/" loading="lazy" />
-            <h3>Hole io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=ships3d'">
-            <img src="Screenshot 2024-07-28 180650.png" alt="https://yp3d.com/ships3d/" loading="lazy" />
-            <img src="ships3dko.gif" alt="#" loading="lazy" />
-            <h3>Ships 3d</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=flower'">
-            <img src="Screenshot 2024-07-28 180906.png" alt="https://krew.io/" loading="lazy" />
-            <img src="krew11.gif" alt="https://yp3d.com/ships3d/" loading="lazy" />
-            <h3>Krew.io 3d</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=goodwar'">
-            <img src="Screenshot 2024-07-28 181245.png" alt="https://warbrokers.io/" loading="lazy" />
-            <img src="wsinthechat.gif" alt="https://warbrokers.io/" loading="lazy" />
-            <h3>War brokers</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=amongus'">
-            <img src="Screenshot 2024-07-28 181520.png" alt="https://amongusplay.online/" loading="lazy" />
-            <img src="whyareyoureadingdis.gif" alt="https://amongusplay.online/" loading="lazy" />
-            <h3>Amongusplay.online</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=shellshock'">
-            <img src="Screenshot 2024-07-28 181715.png" alt="ShellShock.io" loading="lazy" />
-            <img src="285insrtmeme.gif" alt="ShellShock.io" loading="lazy" />
-            <h3>ShellShock.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=nugget'">
-            <img src="Screenshot 2024-07-28 181810.png" alt="https://nuggetroyale.io/#Ketchup" loading="lazy" />
-            <img src="100 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Nuggetroyale io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=landho'">
-            <img src="Screenshot 2024-07-28 182005.png" alt="https://landho.uk/" loading="lazy" />
-            <img src="101 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Landho.io io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=tileman'">
-            <img src="Screenshot 2024-07-28 182121.png" alt="https://tileman.io/" loading="lazy" />
-            <img src="102 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Tileman io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=dashcraft'">
-            <img src="Screenshot 2024-07-28 182420.png" alt="https://dashcraft.io/" loading="lazy" />
-            <img src="103 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Dashcraft.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=battletabs'">
-            <img src="Screenshot 2024-07-28 182616.png" alt="https://tyran.io/" loading="lazy" />
-            <img src="104 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Tyran.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=blocktanks'">
-            <img src="Screenshot 2024-07-28 182855.png" alt="https://ferals.io/" loading="lazy" />
-            <img src="104 - Made with Clipchamp (1).gif" alt="#" loading="lazy" />
-            <h3>ferals.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=dudes'">
-            <img src="Screenshot 2024-07-28 182954.png" alt="https://battledudes.io/" loading="lazy" />
-            <img src="105 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Battle dudes</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=gobattle'">
-            <img src="Screenshot 2024-07-28 183106.png" alt="https://gobattle.io/#!" loading="lazy" />
-            <img src="106 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Gobattle.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=goober'">
-            <img src="Screenshot 2024-07-28 183208.png" alt="https://gooberroyale.winterpixel.io/" loading="lazy" />
-            <img src="107 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Goober royale</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=snake'">
-            <img src="Screenshot 2024-07-28 183302.png" alt="http://slither.com/io" loading="lazy" />
-            <img src="108 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Slither.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=gulper'">
-            <img src="Screenshot 2024-07-28 183404.png"alt="https://gulper.io/">
-            <img src="108 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Gulper.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=minigi'">
-            <img src="Screenshot 2024-07-28 183525.png"alt="https://minigiants.io/?v=1.6.74">
-            <img src="120 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Minigiants.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=starblast'">
-            <img src="Screenshot 2024-07-28 200146.png"alt="https://starblast.io/mobile.html">
-            <img src="121 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Starblast.io</h3>
-        </div>
-        <div class="game-item" onclick="window.location.href='fullscreen.html?game=greendoor'">
-            <img src="Screenshot 2024-07-28 175907.png" alt="https://voxiom.io/" loading="lazy" />
-            <h3>Voxiom io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=diep'">
-            <img src="Screenshot 2024-07-28 200721.png">
-            <img src="123 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Diep.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=sploop'">
-            <img src="Screenshot 2024-07-28 200835.png"alt="https://sploop.io/">
-            <img src="124 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Sploop.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=narwhale'">
-            <img src="Screenshot 2024-07-28 204923.png"alt="http://www.narwhale.io/">
-            <img src="125 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>narwhale.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=ev'">
-            <img src="Screenshot 2024-07-28 210343.png"alt="https://ev.io/">
-            <img src="126 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Ev.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=stug'">
-            <img src="Screenshot 2024-07-28 210756.png">
-            <img src="127 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Stug.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=apes'">
-            <img src="Screenshot 2024-07-28 210932.png" alt="https://apes.io/" loading="lazy" />
-            <img src="128 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Apes io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=Taming'">
-            <img src="Screenshot 2024-07-28 211345.png" alt="https://taming.iao/o/" loading="lazy" />
-            <img src="129 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Taming.io</h3>   
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=Krunker'">
-            <img src="Screenshot 2024-07-28 211619.png" alt="https://krunker.io" loading="lazy" />
-            <img src="130 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Krunker.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=1v1.lol'">
-            <img src="Screenshot 2024-07-28 212446.png" alt="https://1v1.lol" loading="lazy" />
-            <img src="131 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>1v1.lol</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=Narrow one'">
-            <img src="Screenshot 2024-07-28 212744.png" alt="https://narrow.one" loading="lazy" />
-            <img src="131 - Made with Clipchamp (1).gif" alt="#" loading="lazy" />
-            <h3>Narrow one</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=Zombsroyale'">
-            <img src="Screenshot 2024-07-29 070228.png" alt="https://zombsroyale.io" loading="lazy" />
-            <img src="132 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Zombs Royale</h3>
-       </div> 
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=Yohoho'">
-            <img src="Screenshot 2024-07-29 070437.png" alt="https://yohoho.io" loading="lazy" />
-            <img src="133 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>yohoho.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=Lordz'">
-            <img src="Screenshot 2024-07-29 070830.png" alt="https://lordz.io" loading="lazy" />
-            <img src="134 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Lordz.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=Tanko'">
-            <img src="Screenshot 2024-07-29 071209.png"      
-            alt="https://html5.gamedistribution.com/0096623d22314e98ac7af01cbd5dfeca/" loading="lazy" />
-            <img src="135 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Tanko.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=Stabfish'">
-            <img src="Screenshot 2024-07-29 071538.png" alt="https://stabfish2.io/#/" loading="lazy" />
-            <img src="136 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Stabfish2.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=Astrodud'">
-            <img src="Screenshot 2024-07-29 071729.png" alt="https://astrodud.io" loading="lazy" />
-            <img src="137 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Astrodud.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=Braainsio'">
-            <img src="Screenshot 2024-07-29 071906.png" alt="https://www.modd.io/play/braainsio/" loading="lazy" />
-            <img src="138 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Braainsio.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=Build'">
-            <img src="Screenshot 2024-07-29 072609.png" alt="https://buildroyale.io" loading="lazy" />
-            <img src="139 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Buildroyale.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=Skribbl'">
-            <img src="Screenshot 2024-07-29 072847.png" alt="https://skribbl.io" loading="lazy" />
-            <img src="140 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Skribbl.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=Digdig'">
-            <img src="Screenshot 2024-07-29 073122.png" alt="https://digdig.io" loading="lazy" />
-            <img src="141 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Digdig.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=Superspin'">
-            <img src="Screenshot 2024-07-29 073310.png" alt="https://superspin.io" loading="lazy" />
-            <img src="141 - Made with Clipchamp (1).gif" alt="#" loading="lazy" />
-            <h3>Superspin.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=Ducklings'">
-            <img src="Screenshot 2024-07-29 073440.png" alt="https://ducklings.io/#643230367" loading="lazy" />
-            <img src="142 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Ducklings</h3>
-       </div>
-        <div class="game-item" onclick="window.location.href='fullscreen.html?game=Richup'">
-            <img src="Screenshot 2024-07-29 074422.png" alt="https://richup.io" loading="lazy" />
-            <h3>Richup.io</h3>
-      </div>
-       <div class="game-item" onclick="window.location.href='fullscreen.html?game=mk48'">
-            <img src="Screenshot 2024-07-29 084329.png" alt="https://mk48.io" loading="lazy" />
-            <h3>MK48.io</h3>
-        </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=slowroads'">
-            <img src="Screenshot 2024-08-14 121041.png" alt="https://slowroads.io/" loading="lazy" /> 
-            <img src="slowroads - Made with Clipchamp.gif" alt="#" loading="lazy" />
-             <h3>slowroads.io</h3>
-      </div>
-       <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=mineparkour'">
-            <img src="Screenshot 2024-07-29 084538.png" alt="https://mineparkour.club" loading="lazy" />
-            <img src="143 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>MineParkour.club</h3>
-      </div>
-       <div class="game-item" onclick="window.location.href='fullscreen.html?game=mudwars'">
-            <img src="Screenshot 2024-07-29 084802.png" alt="https://mudwars.io" loading="lazy" />
-            <h3>MudWars.io</h3>
-      </div>
-       <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=warbot'">
-            <img src="Screenshot 2024-07-29 085059.png" alt="https://game.warrobots.com/page36306454.html?_1lr=0-3799240_2078650_166853507471&oprtrack=4773__1larg_sub%3D166853507471%26gclid%3DCj0KCQjw-5y1BhC-ARIsAAM_oKlCDw2OQhCmDQNi0QJDx7ckoUCGAoVAkjlGI_HPDq2se2_g0SHgBo8aAgH2EALw_wcB%26url%3Dhttps%253A%252F%252Fgame.warrobots.com%252Fpage36306454.html%253Fgad_source%253D1&gclid=Cj0KCQjw-5y1BhC-ARIsAAM_oKlCDw2OQhCmDQNi0QJDx7ckoUCGAoVAkjlGI_HPDq2se2_g0SHgBo8aAgH2EALw_wcB" loading="lazy" />
-            <img src="143 - Made with Clipchamp (1).gif" alt="#" loading="lazy" />
-            <h3>Warbot.io</h3>
-      </div>
-       <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=mope'">
-            <img src="Screenshot 2024-07-29 085529.png" alt="https://mope.io" loading="lazy" />
-            <img src="144 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Mope.io</h3>
-      </div>
-       <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=crowdcity'">
-            <img src="Screenshot 2024-07-29 085833.png" alt="https://crowdcity.io" loading="lazy" />
-            <img src="145 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>CrowdCity.io</h3>
-      </div>
-       <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=superhex'">
-            <img src="Screenshot 2024-07-29 090033.png" alt="https://super-hex.io" loading="lazy" />
-            <img src="145 - Made with Clipchamp (1).gif" alt="#" loading="lazy" />
-            <h3>SuperHex.io</h3>
-      </div>
-       <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=gats'">
-            <img src="Screenshot 2024-07-29 090202.png" alt="https://gats.io" loading="lazy" />
-            <img src="146 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Gats.io</h3>
-      </div>
-       <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=eparkour'">
-            <img src="Screenshot 2024-07-29 090355.png" alt="https://eparkour.io" loading="lazy" />
-            <img src="147 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>eParkour.io</h3>
-      </div>
-       <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=creatur'">
-            <img src="Screenshot 2024-07-29 090730.png" alt="https://www.creatur.io" loading="lazy" />
-            <img src="147 - Made with Clipchamp (1).gif" alt="#" loading="lazy" />
-            <h3>Creatur.io</h3>  
-      </div>
-       <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=armedforces'">
-            <img src="Screenshot 2024-07-29 091018.png" alt="https://armedforces.io" loading="lazy" />
-            <img src="148 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>ArmedForces.io</h3>
-      </div>
-       <div class="game-item" onclick="window.location.href='fullscreen.html?game=betrayal'">
-            <img src="Screenshot 2024-07-29 091528.png" alt="https://betrayal.io" loading="lazy" />
-            <h3>Betrayal.io</h3>  
-      </div>
-       <div class="game-item game-hoverg" onclick="window.location.href='fullscreen.html?game=copter'">
-            <img src="Screenshot 2024-07-29 091832.png" alt="https://copter.io" loading="lazy" />
-            <h3>Copter.io</h3>
-      </div>
-       <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=pung'">
-            <img src="Screenshot 2024-07-29 092027.png" alt="https://pung.io" loading="lazy" />
-            <img src="149 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Pung.io</h3>
-      </div>
-       <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=moomoo'">
-            <img src="Screenshot 2024-08-05 222351.png" alt="moomoo.io/?server=us-west:" loading="lazy" />
-            <img src="150 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>MooMoo.io</h3>
-      </div>
-       <div class="game-item" onclick="window.location.href='fullscreen.html?game=minecraft'">
-            <img src="Screenshot 2024-07-29 092348.png" alt="https://mine-craft.io" loading="lazy" />
-            <h3>Mine-Craft.io</h3>
-       </div>
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=bombhopper'">
-            <img src="Screenshot 2024-07-29 092433.png" alt="https://bombhopper.io" loading="lazy" />
-            <img src="151 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>BombHopper.io</h3>
-      </div>
-       <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=justfall'">
-            <img src="Screenshot 2024-07-29 092751.png" alt="https://justfall.lol" loading="lazy" />
-            <img src="152 - Made with Clipchamp (1).gif" alt="#" loading="lazy" />
-            <h3>JustFall.lol</h3>
-      </div>
-       <div class="game-item" onclick="window.location.href='fullscreen.html?game=evoblade'">
-            <img src="Screenshot 2024-07-29 093237.png" alt="https://evoblade.io" loading="lazy" />
-            <h3>EvoBlade.io</h3>
-      </div>
-       <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=lolshot'">
-            <img src="Screenshot 2024-07-29 093546.png" alt="https://lolshot.io" loading="lazy" />
-            <img src="153 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>LolShot.io</h3>
-      </div>
-       <div class="game-item" onclick="window.location.href='fullscreen.html?game=armyclash'"> 
-            <img src="Screenshot 2024-07-29 094043.png" alt="https://armyclash.io" loading="lazy" />
-            <h3>ArmyClash.io</h3>
-       </div> 
-        <div class="game-item" onclick="window.location.href='fullscreen.html?game=flappyroyale'">
-            <img src="Screenshot 2024-08-01 165550.png" alt="https://flappyroyale.io" loading="lazy" />
-            <h3>Army Men - Sarge's Heroes (USA)</h3>
-        </div> 
-        <div class="game-item game-hover" onclick="window.location.href='fullscreen.html?game=smbros'">
-            <img src="Screenshot 2024-08-01 170653.png" alt="https://www.retrogames.cc/embed/32117-super-smash-bros-usa.html" loading="lazy" />
-            <img src="154 - Made with Clipchamp.gif" alt="#" loading="lazy" />
-            <h3>Super Smash Bros. (USA)</h3>
-        </div> 
-        <div class="game-item" onclick="window.location.href='fullscreen.html?game=dmca'">
-            <img src="Screenshot 2024-08-02 082229.png" alt="https://www.retrogames.cc/embed/45182-mario-gets-a-dmca-on-twitch-64.html" loading="lazy" />
-            <h3>Mario gets a DMCA on Twitch 64 test</h3>
-        </div> 
-        <div class="game-item" onclick="window.location.href='fullscreen.html?game=dmca'">
-            <img src="Screenshot 2024-08-02 083659.png" alt="https://www.retrogames.cc/embed/44789-super-mario-bros-two-player-hack-shared-lives.html" loading="lazy" />
-            <h3>Super Mario Bros. Two-Player Hack (Shared Lives)</h3>
-        </div> 
-        <div class="game-item" onclick="window.location.href='fullscreen.html?game=Tetris'">
-            <img src="Screenshot 2024-08-02 084959.png" alt="https://www.retrogames.cc/embed/17612-tetris-usa.html" loading="lazy" />
-            <h3>Tetris (USA)</h3>
-        
-              
-        
-    </section>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #0C0D14;
-            color: #F9FAFF;
-            margin: 0;
-            padding: 0;
-        }
-        .game-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            padding: 20px;
-        }
-        .game-item {
-            width: 200px;
-            margin: 20px;
-            text-align: center;
-            cursor: pointer;
-        }
-        .game-item img {
-            width: 100%;
-            max-width: 200px;
-            height: auto;
-        }
-        .game-item h3 {
-            font-size: 18px;
-            margin: 10px 0;
-        }
-    </style>
-
-    <header>
-        <h1></h1>
-    </header>
-    <section class="game-list">
-       
-
-
-       </div>
-        <!-- Add more game items as needed -->
-        <a href="https://amazon.com/tryprimegaming?tag=mymowa-20">
-            <img src="amazon-prime-gaming.webp" alt="Description of Image" style="width:200px;height:auto;border-radius:15px;float:left;margin:20px;" loading="lazy" />
-        </a>
-    </a>
-    <a href="https://www.amazon.com/music/unlimited?tag=mymowa-20">
-        <img src="aznmusic.webp" alt="Description of Image" style="width:180px;height:auto;border-radius:15px;float:left;margin:20px;" loading="lazy" />
-    </a>
-    <a href="http://www.amazon.com/tryprimefree?tag=mymowa-20">
-        <img src="primevideo-seo-logo-630x360.webp" alt="Description of Image" style="width:180px;height:auto;border-radius:15px;float:left;margin:20px;" loading="lazy" />
-    </a>
-    
-    </section>
-    <style>
-        body {
-          background-image: url('backk57.jpg');
-          background-repeat: no-repeat;
-          background-attachment: fixed;
-          background-size: 100% 100%;
-        }
-        </style>
 </body>
+
 </html>
-
-
-
-
- 
-

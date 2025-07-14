@@ -1,0 +1,92 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #000; /* Dark background */
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999; /* Bring canvas above all content */
+    pointer-events: none; /* So you can click elements underneath */
+}
+/* vars and mixins */
+@button-color: cornflowerblue;
+@button-height: 100px;
+@button-width: 240px;
+@squish: 10px; /* vary the squish amount */
+
+.square-side {
+  content:"";
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: (@button-width/2) solid transparent;
+  border-top-width: 0;
+  border-bottom-width: 0;
+  height: 100%;
+  width: 0;
+  z-index: -1;
+  transition: all .1s ease-out;
+  -webkit-transition: all .1s ease-out;
+}
+
+.trapezoid-side {
+  border-top-width: @squish;
+  border-bottom-width: @squish;
+  border-radius: .2em;
+  top: -(@squish);
+}
+
+/* styles */
+
+body {background: lightgray;}
+
+button{ 
+  font-size: 2em;
+  color: white;
+  display: block;
+  margin: 2em auto;
+  height: @button-height;
+  width: @button-width;
+  background: @button-color;
+  border: none;
+  position: relative;
+  width: @button-width;
+  transition: all .2s ease-out;
+  -webkit-transition: all .2s ease-out;
+  box-shadow: 0 0 .25em #333;
+  cursor: pointer;
+  outline: none;
+  
+  &::before {
+    .square-side;
+    border-left-color: @button-color;
+  }
+
+  &::after {
+    .square-side;
+    border-right-color: @button-color;
+  }
+  
+  /* mashed state */
+  &:active {
+   -webkit-transform: scale(1.2,.8);
+    
+   &::before {
+     .trapezoid-side;
+     border-left-color: @button-color;
+   }
+
+   &::after {
+     .trapezoid-side;
+     border-right-color: @button-color;
+   }
+  }
+}/* end button */
