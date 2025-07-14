@@ -197,7 +197,77 @@
       /* On top of everything visually */
     }
   </style>
+
 </head>
+<style>
+  /* Container fixed at top center */
+  #safe-search-wrapper {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 500px;
+    z-index: 1000;
+    text-align: center;
+  }
+
+  /* Search bar with left padding for potato icon */
+  #safe-search-bar {
+    width: 100%;
+    padding: 10px 15px 10px 45px; /* left padding for icon */
+    border: 2px solid #666;
+    border-radius: 25px;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    position: relative;
+  }
+
+  /* Potato icon container */
+  #potato-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    animation: potato-bounce 2s ease-in-out infinite;
+    pointer-events: none; /* so it doesn't block input clicks */
+  }
+
+  /* Simple bounce animation */
+  @keyframes potato-bounce {
+    0%, 100% {
+      transform: translateY(-50%) translateY(0);
+    }
+    50% {
+      transform: translateY(-50%) translateY(-6px);
+    }
+  }
+</style>
+
+<div id="safe-search-wrapper">
+  <input id="safe-search-bar" type="text" placeholder=" Search games..." />
+  <!-- Potato emoji as icon -->
+  <div id="potato-icon">🥔</div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('safe-search-bar');
+    const gameCards = document.querySelectorAll('.game-card');
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      gameCards.forEach(card => {
+        const title = card.querySelector('h3')?.innerText.toLowerCase() || '';
+        card.style.display = title.includes(query) ? 'block' : 'none';
+      });
+    });
+  });
+</script>
+
 <!-- SHARE MODAL -->
 <div id="share-modal" style="
   display:none;
