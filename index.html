@@ -215,7 +215,8 @@
   /* Search bar with left padding for potato icon */
   #safe-search-bar {
     width: 100%;
-    padding: 10px 15px 10px 45px; /* left padding for icon */
+    padding: 10px 15px 10px 45px;
+    /* left padding for icon */
     border: 2px solid #666;
     border-radius: 25px;
     font-size: 16px;
@@ -233,14 +234,18 @@
     width: 20px;
     height: 20px;
     animation: potato-bounce 2s ease-in-out infinite;
-    pointer-events: none; /* so it doesn't block input clicks */
+    pointer-events: none;
+    /* so it doesn't block input clicks */
   }
 
   /* Simple bounce animation */
   @keyframes potato-bounce {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(-50%) translateY(0);
     }
+
     50% {
       transform: translateY(-50%) translateY(-6px);
     }
@@ -301,97 +306,119 @@
   <div class="container">
     <div class="sidebar" id="sidebar">
       <img src="spudlogo.png" alt="soon to be logo" width="auto" height="auto" />
-      
-      <button id="show-leaderboard-btn">Show Leaderboard</button>                       
+
+      <button id="show-leaderboard-btn">Show Leaderboard</button>
       <button onclick="openShareModal()">📢 Invite Friends</button>
       <button onclick="window.location.href='https://discord.gg/8NCprcYySS'">Discord!</button>
       <button onclick="window.location.href='house.html'">House</button>
       <div id="site-time" style="color:#ccc; font-size: 0.9em; padding: 10px; text-align:center;">
         Total time on site: <span id="total-time">0s</span>
-<style>
-  .marquee-container {
-    width: 100%;
-    height: 120px; /* adjust height as needed */
-    overflow: hidden;
-    position: relative;
-    /* No background color, fully transparent */
-    background: transparent;
-  }
+        <style>
+          .marquee-container {
+            width: 100%;
+            height: 120px;
+            /* adjust height as needed */
+            overflow: hidden;
+            position: relative;
+            /* No background color, fully transparent */
+            background: transparent;
+          }
 
-  .marquee-track {
-    display: flex;
-    position: absolute;
-    white-space: nowrap;
-    will-change: transform;
-    animation: scroll-left 20s linear infinite;
-  }
+          .marquee-track {
+            display: flex;
+            position: absolute;
+            white-space: nowrap;
+            will-change: transform;
+            animation: scroll-left 20s linear infinite;
+          }
 
-  .marquee-track:hover {
-    animation-play-state: paused;
-  }
+          .marquee-track:hover {
+            animation-play-state: paused;
+          }
 
-  .marquee-track img {
-    width: 50px; /* adjust image size */
-    height: 50px;
-    margin: 0 15px;
-    position: relative;
-  }
+          .marquee-track img {
+            width: 50px;
+            /* adjust image size */
+            height: 50px;
+            margin: 0 15px;
+            position: relative;
+          }
 
-  @keyframes scroll-left {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-</style>
+          @keyframes scroll-left {
+            0% {
+              transform: translateX(0);
+            }
 
-<div class="marquee-container" id="marquee">
-  <div class="marquee-track" id="marquee-track">
-    <!-- Images will be inserted here -->
-  </div>
-</div>
+            100% {
+              transform: translateX(-20%);
+            }
+          }
+        </style>
 
-<script>
-  const images = [
-    'spud1run.png',
-    'spud2run.png',
-    'spud3run.png',
-    'spud4run.png',
-    'spud5run.png',
-    'spud6run.png',
-    'spud7run.png',
-    '0cd696e7d083612eb8d98f70729186bf.png',
-    '8444afd73eb34c28246d224e35e40723.png',
-    '9075b1eb40a413996961047401dd8192.png',
-    '06246591d7da68194992fe30e360be25.png',
-    'a3863345acdb99ed26405e82fc8cfb5f.png',
-    'ab596106b0caf13f8fe03c11fc53d496.png',
-    'bf1cd9d8511265420f436766f0f3695c.png',
-  ];
+        <div class="marquee-container" id="marquee">
+          <div class="marquee-track" id="marquee-track">
+            <!-- Images will be inserted here -->
+          </div>
+        </div>
 
-  const track = document.getElementById('marquee-track');
+        <script>
+          const images = [
+            'spud1run.png',
+            'spud2run.png',
+            'spud3run.png',
+            'spud4run.png',
+            'spud5run.png',
+            'spud6run.png',
+            'spud7run.png',
+            '0cd696e7d083612eb8d98f70729186bf.png',
+            '8444afd73eb34c28246d224e35e40723.png',
+            '9075b1eb40a413996961047401dd8192.png',
+            '06246591d7da68194992fe30e360be25.png',
+            'a3863345acdb99ed26405e82fc8cfb5f.png',
+            'ab596106b0caf13f8fe03c11fc53d496.png',
+            'bf1cd9d8511265420f436766f0f3695c.png',
+            '1e8d5dbde25fed460c99f93908418704.png',
+            '2c8d9d5e66d651ecc9efe582c924dd8c.png',
+            '8c4651417bc3b9b5b4c3504a8300c636.png',
+            '9c6d387b5d4fd8c5ad7bed43848f519c.png',
+            '24fac13ba78add5cd7325cd992f80534.png',
+            '55ecd428d0a59e86ea09fde997ece285.png',
+            '071d5b45cf5e36d2c87488167a16b758.png',
+            '06246591d7da68194992fe30e360be25.png',
+            '43927465bae6a6dcb342f525e4c28026.png',
+            'a6aa984f2a6c0bffcad8367305622661.png',
+            'ab73b35536fdde05861a1e982bd75d9c.png',
+            'b0d5a98f0de90b566d3ce9cf860b1a0f.png',
+            'bf9b3b95ce27bf4889461b29c1b2f138.png',
+            'd4968c204ccd0cb9bd136c4b18b19c92.png',
 
-  function createImageElements() {
-    const fragment = document.createDocumentFragment();
+          ];
 
-    images.forEach(src => {
-      const img = document.createElement('img');
-      img.src = src;
-      const offset = Math.floor(Math.random() * 30) + 20;
-      img.style.top = offset + 'px';
-      fragment.appendChild(img);
-    });
+          const track = document.getElementById('marquee-track');
 
-    return fragment;
-  }
+          function createImageElements() {
+            const fragment = document.createDocumentFragment();
 
-  track.appendChild(createImageElements());
-  track.appendChild(createImageElements());
-  
-</script>
-	<iframe class="qp_iframe" src="https://poll-maker.com/frame5534605xd21f4E5D-164" seamless="seamless" frameborder="no" style="border:0; background:transparent; width:100%; height:100%;"></iframe><div id='qp_foot5534605' style='width:100%; padding:5px; text-align:center;'>Created with <a href='https://poll-maker.com/poll5534605xd21f4E5D-164'>Poll Maker</a></div><STYLE></STYLE>
+            images.forEach(src => {
+              const img = document.createElement('img');
+              img.src = src;
+              const offset = Math.floor(Math.random() * 30) + 20;
+              img.style.top = offset + 'px';
+              fragment.appendChild(img);
+            });
+
+            return fragment;
+          }
+
+          track.appendChild(createImageElements());
+          track.appendChild(createImageElements());
+
+        </script>
+        <iframe class="qp_iframe" src="https://poll-maker.com/frame5534605xd21f4E5D-164" seamless="seamless"
+          frameborder="no" style="border:0; background:transparent; width:100%; height:100%;"></iframe>
+        <div id='qp_foot5534605' style='width:100%; padding:5px; text-align:center;'>Created with <a
+            href='https://poll-maker.com/poll5534605xd21f4E5D-164'>Poll Maker</a></div>
+        <STYLE></STYLE>
       </div>
 
 
@@ -400,7 +427,7 @@
     <div class="content">
       <!-- All your game cards -->
 
-  <div class="game-card" onclick="openGame('https://slither.io/')">
+      <div class="game-card" onclick="openGame('https://slither.io/')">
         <img src="slitherio.png" alt="Slither.io" />
         <h3>Slither.io</h3>
       </div>
@@ -736,7 +763,13 @@
       </div>
     </div>
   </div>
-
+  <div id="sfcb3bqcwry37mw4sar4jb9nyre2wq9knsn"></div>
+  <script type="text/javascript"
+    src="https://counter1.optistats.ovh/private/counter.js?c=b3bqcwry37mw4sar4jb9nyre2wq9knsn&down=async"
+    async></script><br><a href="https://www.freecounterstat.com">free website counter</a><noscript><a
+      href="https://www.freecounterstat.com" title="free website counter"><img
+        src="https://counter1.optistats.ovh/private/freecounterstat.php?c=b3bqcwry37mw4sar4jb9nyre2wq9knsn" border="0"
+        title="free website counter" alt="free website counter"></a></noscript>
   <!-- Star cursor canvas -->
   <canvas id="starCanvas"></canvas>
 
